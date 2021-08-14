@@ -1,0 +1,5 @@
+# Project exclude paths
+/cas-client-springboot-demo/target/
+/cas-pac4j-oauth-client-demo/target/
+/cas-proxy-client-springboot-demo/target/
+/cas-proxy-client-springboot-demo-v1/target/
