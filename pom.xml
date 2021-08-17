@@ -33,7 +33,11 @@
 
         <module>cas-client-springboot-demo</module>
 
+        <module>cas-client-springboot-demo-v1</module>
+
         <module>cas-proxy-client-springboot-demo-v1</module>
+        <module>cas-proxy-client-springboot-demo-v2</module>
+        <module>cas-proxyed-client-springboot-demo-v2</module>
 
         <module>cas-proxy-client-springboot-demo</module>
         <module>cas-proxy-client-tomcat8-demo</module>
