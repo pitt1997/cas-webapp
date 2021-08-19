@@ -15,8 +15,8 @@
 
 
     <modules>
-        <module>cas-client-demo1</module>
-        <module>cas-client-demo2</module>
+        <module>cas-proxy-client-demo</module>
+        <module>cas-proxyed-client-demo</module>
     </modules>
 
 </project>
