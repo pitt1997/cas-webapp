@@ -50,6 +50,7 @@
         <module>springboot-security-jwt-demo</module>
         <module>springboot-sso-jwt-demo</module>
 
+        <module>cas-proxy-sso-demo</module>
     </modules>
 
     <build>
