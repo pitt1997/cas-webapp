@@ -1,6 +1,0 @@
-server:
-  servlet:
-    context-path: /casBootDemo
-  port: 8081
-
-

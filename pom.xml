@@ -28,29 +28,12 @@
     <description>cas Webapp</description>
 
     <modules>
-        <module>cas-server-spring-demo</module>
-        <module>cas-server-springboot-demo</module>
-
-        <module>cas-client-springboot-demo</module>
-
-        <module>cas-client-springboot-demo-v1</module>
-
-        <module>cas-proxy-client-springboot-demo-v1</module>
-        <module>cas-proxy-client-springboot-demo-v2</module>
-        <module>cas-proxyed-client-springboot-demo-v2</module>
-
-        <module>cas-proxy-client-springboot-demo</module>
-        <module>cas-proxy-client-tomcat8-demo</module>
-
-        <module>cas-pac4j-oauth-client-demo</module>
-        <module>cas-pac4j-oauth-server-demo</module>
-
-
-        <module>springboot-admin-server-demo</module>
-        <module>springboot-security-jwt-demo</module>
-        <module>springboot-sso-jwt-demo</module>
-
+        <module>cas-base-server</module>
+        <module>cas-base-client</module>
         <module>cas-proxy-sso-demo</module>
+        <module>cas-proxy-sso-demo-v1</module>
+        <module>cas-delegate-sso-demo</module>
+        <module>springboot-web-demo</module>
     </modules>
 
     <build>
@@ -67,6 +50,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

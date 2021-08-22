@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pitt</groupId>
+    <artifactId>cas-proxy-client-springboot-demo-v1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- <packaging>war</packaging> -->
+    <name>cas-proxy-client-springboot-demo-v1 Maven Webapp</name>
+    <description>cas-proxy-client-springboot-demo-v1 demo</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.version>4.2.8.RELEASE</spring.version>
+        <spring.webflow.version>2.4.5.RELEASE</spring.webflow.version>
+        <cas.version>4.2.7</cas.version>
+        <guava.vsersion>23.5-jre</guava.vsersion>
+        <maven-jetty-plugin.version>9.3.6.v20151106</maven-jetty-plugin.version>
+        <webVersion>2.3</webVersion>
+        <spring_jpa_version>1.11.3.RELEASE</spring_jpa_version>
+        <hibernate.version>4.2.5.Final</hibernate.version>
+        <druid.version>1.0.16</druid.version>
+        <mybatis.version>3.3.0</mybatis.version>
+        <slf4j.version>1.6.6</slf4j.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <springboot.version>2.0.0.RELEASE</springboot.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springboot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+            <version>${springboot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-cas</artifactId>
+            <version>5.1.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+
+    </dependencies>
+    
+</project>

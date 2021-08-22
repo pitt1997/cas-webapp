@@ -1,0 +1,8 @@
+{
+  "@class" : "org.jasig.cas.services.RegexRegisteredService",
+  "serviceId" : "^(http)://.*",
+  "name" : "HTTP",
+  "id" : 10000,
+  "evaluationOrder": 10000,
+  "description" : "HTTP url"
+}

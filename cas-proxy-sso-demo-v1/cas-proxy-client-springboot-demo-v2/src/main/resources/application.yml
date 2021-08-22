@@ -1,0 +1,6 @@
+server:
+  servlet:
+    context-path: /cas-portal
+  port: 8091
+
+

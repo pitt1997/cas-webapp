@@ -1,0 +1,31 @@
+server:
+  port: 8081
+
+#spring:
+#  application:
+#    name: cas-client
+#  resources:
+#    static-locations: file:${work.home}/web/
+#
+#server:
+#  port: 8500
+#  servlet:
+#    context-path: /
+#    application-display-name: cas-client
+#  tomcat:
+#    max-threads: 200
+#    uri-encoding: UTF-8
+#
+#logging:
+#  file: ${user.dir}/logs/cas-client.log
+
+cas:
+  server:
+#    prefix: https://cas.example.com:8443/cas
+    prefix: http://localhost:8080/cas
+    login: /login
+    logout: /logout
+  client:
+    prefix: http://localhost:8081/clientapp
+    login: /login/cas
+    logout: /logout/cas
