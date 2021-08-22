@@ -92,3 +92,6 @@
 
 ---
 
+
+### 参考
+https://apereo.atlassian.net/wiki/spaces/CASC/pages/103252629/Yale+CAS+Clients+2.0.11
