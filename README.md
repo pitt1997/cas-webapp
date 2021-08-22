@@ -3,7 +3,7 @@
 - **作者：pitt**
 - **GitHub：https://github.com/pitt1997/cas-webapp**
 
-> 以下内容根据可能会有不正确的地方，还需改进！
+> 以下内容还在编写中...
 
 ### 框架说明
 
@@ -15,17 +15,6 @@
 ### 项目演示
 
 ### 项目目录
-
-
-
-
-
-
-
-springboot-admin-server-demo
-springboot-security-jwt-demo
-springboot-sso-jwt-demo
-
 
 ```markdown
 ├── README.md
@@ -97,13 +86,8 @@ springboot-sso-jwt-demo
 
 ### 教程目录
 
-
-
-
-
-
-
-
+- CAS 4.2.x 版本代理认证实现
+- CAS 4.2.x 版本委托认证实现
 
 
 ---
