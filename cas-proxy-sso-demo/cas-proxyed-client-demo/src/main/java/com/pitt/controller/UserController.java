@@ -1,6 +1,6 @@
-package com.tingfeng.controller;
+package com.pitt.controller;
 
-import com.tingfeng.domain.User;
+import com.pitt.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

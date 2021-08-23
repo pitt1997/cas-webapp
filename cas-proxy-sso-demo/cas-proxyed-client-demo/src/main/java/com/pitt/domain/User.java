@@ -1,4 +1,4 @@
-package com.tingfeng.domain;
+package com.pitt.domain;
 
 public class User {
 

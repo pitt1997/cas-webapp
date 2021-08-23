@@ -1,4 +1,4 @@
-package com.tingfeng.utils;
+package com.pitt.utils;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -19,12 +19,6 @@ public class HttpProxy {
 
     /**
      * Http 请求(Json格式参数)
-     *
-     * @param requestUrl
-     * @param requestJson
-     * @param httpMethod
-     * @return
-     * @throws Exception
      */
     public static String httpRequest(String requestUrl, String requestJson, HttpMethod httpMethod) {
 

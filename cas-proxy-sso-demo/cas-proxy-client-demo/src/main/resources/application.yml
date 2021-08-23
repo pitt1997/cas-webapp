@@ -3,12 +3,13 @@ logging:
   #日志存储地址
   file: "logs/app-client.log"
 info:
-  name : "App 后端接口"
+  name : "代理客户端"
 
 server:
   #端口号
   port: 8888
-  context-path: /
+  servlet:
+    context-path: /
 #  address: client1.com
 
 #  ssl:
@@ -16,7 +17,6 @@ server:
 #    key-alias: client1.com
 #    key-store-password: changeit
 
-  
 spring:
   mvc:
     view:

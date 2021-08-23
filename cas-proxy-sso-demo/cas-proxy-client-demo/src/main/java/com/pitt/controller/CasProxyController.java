@@ -1,6 +1,6 @@
-package com.tingfeng.controller;
+package com.pitt.controller;
 
-import com.tingfeng.utils.HttpProxy;
+import com.pitt.utils.HttpProxy;
 import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.jasig.cas.client.util.AssertionHolder;
 import org.springframework.http.HttpMethod;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
-import java.security.Principal;
-import java.util.Arrays;
 
 /**
  * Cas代理回调处理
@@ -29,21 +27,20 @@ public class CasProxyController {
             // String serviceUrl = "http://client2.com:8889/user/users";
             String serviceUrl = "http://localhost:8889/user/users";
 
+            // 1、获取到AttributePrincipal对象
             AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
-
-            //1、获取到AttributePrincipal对象
-//            AttributePrincipal principal = AssertionHolder.getAssertion().getPrincipal();
+            /** AttributePrincipal principal = AssertionHolder.getAssertion().getPrincipal(); */
             if (principal == null) {
                 return "用户未登录";
             }
 
-            //2、获取对应的(PT)proxy ticket
+            // 2、获取对应的(PT)proxy ticket
             String proxyTicket = principal.getProxyTicketFor(serviceUrl);
             if (proxyTicket == null) {
                 return "PGT 或 PT 不存在";
             }
 
-            //3、请求被代理应用时将获取到的proxy ticket以参数ticket进行传递
+            // 3、请求被代理应用时将获取到的proxy ticket以参数ticket进行传递
             String url = serviceUrl + "?ticket=" + URLEncoder.encode(proxyTicket, "UTF-8");
             result = HttpProxy.httpRequest(url, "", HttpMethod.GET);
 
@@ -63,19 +60,19 @@ public class CasProxyController {
         try {
             String serviceUrl = "http://localhost:8889/book/books";
 
-            //1、获取到AttributePrincipal对象
+            // 1、获取到AttributePrincipal对象
             AttributePrincipal principal = AssertionHolder.getAssertion().getPrincipal();
             if (principal == null) {
                 return "用户未登录";
             }
 
-            //2、获取对应的(PT)proxy ticket
+            // 2、获取对应的(PT)proxy ticket
             String proxyTicket = principal.getProxyTicketFor(serviceUrl);
             if (proxyTicket == null) {
                 return "PGT 或 PT 不存在";
             }
 
-            //3、请求被代理应用时将获取到的proxy ticket以参数ticket进行传递
+            // 3、请求被代理应用时将获取到的proxy ticket以参数ticket进行传递
             String url = serviceUrl + "?ticket=" + URLEncoder.encode(proxyTicket, "UTF-8");
             result = HttpProxy.httpRequest(url, "", HttpMethod.GET);
 

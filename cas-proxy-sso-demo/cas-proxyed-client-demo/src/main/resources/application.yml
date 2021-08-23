@@ -3,12 +3,13 @@ logging:
   #日志存储地址
   file: "logs/app-client2.log"
 info:
-  name : "App2 后端接口"
+  name : "被代理客户端"
 
 server:
   #端口号
   port: 8889
-  context-path: /
+  servlet:
+    context-path: /
 #  address: client2.com
 
 spring:

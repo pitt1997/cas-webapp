@@ -7,8 +7,9 @@
 
 ### 框架说明
 
-- Maven 或 Gradle
-- springboot 1.5.10
+- Maven
+- Gradle
+- SpringBoot
 - cas-server 4.2.7
 - cas-client 3.5.0
 
@@ -18,66 +19,20 @@
 
 ```markdown
 ├── README.md
-├── cas-client
-│   ├── cas-client-springboot-demo-v1
-│   ├── cas-client-springboot-demo
-│   ├── cas-proxy-client-springboot-demo
-│   ├── cas-proxy-client-tomcat8-demo
-├── cas-server
-│   ├── cas-server-spring-demo
-│   ├── cas-server-springboot-demo
-├── cas-proxy-sso-demo
-│   ├── cas-proxy-client-demo
-│   ├── cas-proxyed-client-demo
-├── cas-delegate-sso-demo
+├── cas-base-client                             【CAS客户端】
+│   ├── cas-client-springboot-demo-v1           
+│   ├── cas-client-springboot-demo              
+├── cas-base-server                             【CAS服务端】
+│   ├── cas-server-spring-demo                  
+│   ├── cas-server-springboot-demo              
+├── cas-proxy-sso-demo                          【CAS代理认证】
+│   ├── cas-proxy-client-demo                       
+│   ├── cas-proxyed-client-demo                     
+├── cas-delegate-sso-demo                       【CAS委托认证】
 │   ├── cas-pac4j-oauth-client-demo
 │   ├── cas-pac4j-oauth-server-demo
-├── cas-restful-api-sso-demo
+├── cas-restful-api-sso-demo                    【CASRestful认证】
 
-
-├── change-static-password
-│   └── cas-overlay-template-master
-├── custom-password-verification
-│   └── cas-overlay-template-master
-├── custom-themes-sso
-│   ├── cas-app1
-│   ├── cas-app2
-│   └── cas-overlay-template-master
-├── email-reset-password
-│   └── cas-overlay-template-master
-├── embed-tomcat-run
-│   └── cas-overlay-template-master
-├── iframe-sso
-│   ├── cas-app1
-│   ├── cas-app2
-│   ├── cas-client1
-│   ├── cas-client2
-│   └── cas-overlay-template-master
-├── jdbc-sso
-│   └── cas-overlay-template-master
-├── outer-tomcat-run
-│   └── server.xml
-├── proxy-sso
-│   ├── cas-overlay-template-master
-│   ├── client1
-│   └── client2
-├── rest-sso
-│   ├── cas-overlay-template-master
-│   └── cas_db
-├── restful-api-sso
-│   ├── cas-app1
-│   ├── cas-app2
-│   ├── cas-client1
-│   ├── cas-client2
-│   ├── cas-overlay-template-master
-│   └── sso-server
-├── simple-sso
-│   ├── cas-app1
-│   ├── cas-app2
-│   └── cas-overlay-template-master
-├── st-storage-redis
-└── yml-config
-    └── cas-overlay-template-master
 ```
 
 目录     | 文档

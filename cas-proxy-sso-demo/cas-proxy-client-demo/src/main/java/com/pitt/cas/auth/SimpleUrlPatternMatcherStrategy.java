@@ -1,4 +1,4 @@
-package com.tingfeng.cas.auth;
+package com.pitt.cas.auth;
 
 import org.jasig.cas.client.authentication.UrlPatternMatcherStrategy;
 

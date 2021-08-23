@@ -1,9 +1,10 @@
-package com.tingfeng;
+package com.pitt;
 
-import com.tingfeng.cas.config.CasConfig;
+import com.pitt.cas.config.CasConfig;
 import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.session.SingleSignOutHttpSessionListener;
+import org.jasig.cas.client.util.AssertionThreadLocalFilter;
 import org.jasig.cas.client.util.HttpServletRequestWrapperFilter;
 import org.jasig.cas.client.validation.Cas30ProxyReceivingTicketValidationFilter;
 import org.springframework.boot.SpringApplication;
@@ -21,34 +22,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 过滤器配置介绍Doc：
- *      http://doc.okbase.net/234390216/archive/105696.html
- *      http://blog.csdn.net/u010475041/article/details/78094251
+ * @author ljs
+ * @date 2021-08-24
+ * @description CAS配置启动
  */
 @SpringBootApplication
-public class Client2AppRun {
-
-    /*************************************   SSO配置-开始   ************************************************/
+public class SpringBootCASProxyClientApp {
 
     /**
-     * SingleSignOutHttpSessionListener 添加监听器
-     * 用于单点退出，该过滤器用于实现单点登出功能，可选配置
-     *
-     * @return
-     */
-    @Bean
-    public ServletListenerRegistrationBean<EventListener> singleSignOutListenerRegistration() {
-        ServletListenerRegistrationBean<EventListener> registrationBean = new ServletListenerRegistrationBean<EventListener>();
-        registrationBean.setListener(new SingleSignOutHttpSessionListener());
-        registrationBean.setOrder(1);
-        return registrationBean;
-    }
-
-    /**
-     * SingleSignOutFilter 登出过滤器
-     * 该过滤器用于实现单点登出功能，可选配置
-     *
-     * @return
+     * SingleSignOutFilter登出过滤器
+     * 该过滤器用于实现单点登出功能
      */
     @Bean
     public FilterRegistrationBean filterSingleRegistration() {
@@ -61,18 +44,54 @@ public class Client2AppRun {
         registration.setInitParameters(initParameters);
         // 设定加载的顺序
         registration.setOrder(1);
+
         return registration;
     }
 
+    /**
+     * SingleSignOutHttpSessionListener添加监听器
+     * 用于单点退出，该过滤器用于实现单点登出功能
+     */
+    @Bean
+    public ServletListenerRegistrationBean<EventListener> singleSignOutListenerRegistration() {
+        ServletListenerRegistrationBean<EventListener> registrationBean = new ServletListenerRegistrationBean<EventListener>();
+        registrationBean.setListener(new SingleSignOutHttpSessionListener());
+        registrationBean.setOrder(1);
+        return registrationBean;
+    }
+
+    /**
+     * Cas30ProxyReceivingTicketValidationFilter 验证过滤器
+     * 该过滤器负责对Ticket的校验工作，必须启用它
+     */
+    @Bean
+    public FilterRegistrationBean filterValidationRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new Cas30ProxyReceivingTicketValidationFilter());
+        // 设定匹配的路径
+        registration.addUrlPatterns("/*");
+        Map<String, String> initParameters = new HashMap();
+        initParameters.put("casServerUrlPrefix", CasConfig.CAS_SERVER_PATH);
+        initParameters.put("serverName", CasConfig.SERVER_NAME);
+
+        initParameters.put("proxyCallbackUrl", CasConfig.PROXY_CALLBACK_URL);
+        initParameters.put("proxyReceptorUrl", "/proxy/callback");
+        // initParameters.put("acceptAnyProxy", "true");   // 接收任何代理
+        // 是否对serviceUrl进行编码，默认true：设置false可以在302对URL跳转时取消显示;jsessionid=xxx的字符串
+        // 观察CommonUtils.constructServiceUrl方法可以看到
+        initParameters.put("encodeServiceUrl", "false");
+
+        registration.setInitParameters(initParameters);
+        // 设定加载的顺序
+        registration.setOrder(1);
+        return registration;
+    }
 
     /**
      * AuthenticationFilter 授权过滤器
-     *
-     * @return
      */
     @Bean
     public FilterRegistrationBean filterAuthenticationRegistration() {
-
         FilterRegistrationBean registration = new FilterRegistrationBean();
         Map<String, String> initParameters = new HashMap();
 
@@ -85,7 +104,7 @@ public class Client2AppRun {
         initParameters.put("ignorePattern", ".*");
 
         // 表示过滤所有
-        initParameters.put("ignoreUrlPatternType", "com.tingfeng.cas.auth.SimpleUrlPatternMatcherStrategy");
+        initParameters.put("ignoreUrlPatternType", "com.pitt.cas.auth.SimpleUrlPatternMatcherStrategy");
 
         registration.setInitParameters(initParameters);
         // 设定加载的顺序
@@ -93,30 +112,17 @@ public class Client2AppRun {
         return registration;
     }
 
-
     /**
-     * Cas30ProxyReceivingTicketValidationFilter 验证过滤器
-     * 该过滤器负责对Ticket的校验工作，必须启用它
-     *
-     * @return
+     * AssertionThreadLocalFilter
+     * 该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。
+     * 比如AssertionHolder.getAssertion().getPrincipal().getName()。
      */
     @Bean
-    public FilterRegistrationBean filterValidationRegistration() {
+    public FilterRegistrationBean filterAssertionThreadLocalRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new Cas30ProxyReceivingTicketValidationFilter());
+        registration.setFilter(new AssertionThreadLocalFilter());
         // 设定匹配的路径
         registration.addUrlPatterns("/*");
-        Map<String, String> initParameters = new HashMap();
-        initParameters.put("casServerUrlPrefix", CasConfig.CAS_SERVER_PATH);
-        initParameters.put("serverName", CasConfig.SERVER_NAME);
-
-        initParameters.put("acceptAnyProxy", "true");
-
-        // 是否对serviceUrl进行编码，默认true：设置false可以在302对URL跳转时取消显示;jsessionid=xxx的字符串
-        // 观察CommonUtils.constructServiceUrl方法可以看到
-        initParameters.put("encodeServiceUrl", "false");
-
-        registration.setInitParameters(initParameters);
         // 设定加载的顺序
         registration.setOrder(1);
         return registration;
@@ -126,8 +132,6 @@ public class Client2AppRun {
      * HttpServletRequestWrapperFilter wraper过滤器
      * 该过滤器负责实现HttpServletRequest请求的包裹，
      * 比如允许开发者通过HttpServletRequest的getRemoteUser()方法获得SSO登录用户的登录名，可选配置。
-     *
-     * @return
      */
     @Bean
     public FilterRegistrationBean filterWrapperRegistration() {
@@ -140,9 +144,6 @@ public class Client2AppRun {
         return registration;
     }
 
-
-    /*************************************   SSO配置-结束   ************************************************/
-
     /**
      * 设定首页
      */
@@ -151,18 +152,18 @@ public class Client2AppRun {
 
         @Override
         public void addViewControllers(ViewControllerRegistry registry) {
-            //设定首页为index
+            // 设定首页为index
             registry.addViewController("/").setViewName("forward:/index");
 
-            //设定匹配的优先级
+            // 设定匹配的优先级
             registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
-            //添加视图控制类
+            // 添加视图控制类
             super.addViewControllers(registry);
         }
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(Client2AppRun.class, args);
+        SpringApplication.run(SpringBootCASProxyClientApp.class, args);
     }
 }
